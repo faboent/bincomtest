@@ -1,0 +1,54 @@
+<!-- views/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Table</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="/">Home</a>
+    <a href="/summed">Summed Results</a>
+    <a href="/results">Store Results</a>
+  </div>
+
+  <h1>Data Table</h1>
+  <div>
+    <table id="data-table">
+        <thead>
+          <tr>
+            <th>Party Abbreviation</th>
+            <th>Party Score</th>
+            <th>Entered By User</th>
+            <th>Date Entered</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+          <!-- Data will be populated here -->
+        </tbody>
+      </table>
+    
+  </div>
+  <script>
+    // Fetch data from the server
+    fetch('/data')
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.getElementById('table-body');
+
+        data.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${row.party_abbreviation}</td><td>${row.party_score}</td><td>${row.entered_by_user}</td><td>${row.date_entered}</td>`;
+          tableBody.appendChild(tr);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        // Handle error if any
+      });
+  </script>
+</body>
+</html>

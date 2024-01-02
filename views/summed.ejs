@@ -1,0 +1,99 @@
+<!-- views/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Table</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+button {
+  padding: 10px 20px;
+  margin: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #555;
+}
+  </style>
+</head>
+
+<body>
+
+  <div class="navbar">
+    <a href="/">Home</a>
+    <a href="/summed">Summed Results</a>
+    <a href="/results">Store Results</a>
+  </div>
+
+  <h2>Summed Total Result by Local Government</h2>
+<select id="local-govt">
+  <option value="1">Aniocha North</option>
+  <option value="2">Aniocha South</option>
+  <option value="5">Ethiope East</option>
+  <option value="6">Ethiope West</option>
+  <option value="7">Ika North-East</option>
+  <option value="8">Ika South</option>
+  <option value="9">Isoko North</option>
+  <option value="10">Isoko South</option>
+  <option value="11">Ndokwa East</option>
+  <option value="12">Ndokwa West</option>
+  <option value="13">Okpe</option>
+  <option value="14">Oshimilli North</option>
+  <option value="15">Oshimilli South</option>
+  <option value="16">Patani</option>
+  <option value="17">Sapele</option>
+  <option value="18">Udu</option>
+  <option value="19">Ughelli North</option>
+  <option value="20">Ughelli South</option>
+  <option value="21">Ukwuani</option>
+  <option value="22">Uvwie</option>
+  <option value="31">Bomadi</option>
+  <option value="32">Burutu</option>
+  <option value="33">Warri North</option>
+  <option value="34">Warri South</option>
+  <option value="35">Warri South West</option>
+  <!-- Add options for all local governments -->
+</select>
+<button onclick="fetchSummedResults()">Get Summed Result</button>
+
+<table id="summed-results">
+  <thead>
+    <tr>
+      <th>Party Abbreviation</th>
+      <th>Total Score</th>
+    </tr>
+  </thead>
+  <tbody id="summed-table-body">
+    <!-- Summed results will be populated here -->
+  </tbody>
+</table>
+<script>
+  function fetchSummedResults() {
+    const selectedLocalGovt = document.getElementById('local-govt').value;
+
+    fetch(`/summed-results?localGovt=${selectedLocalGovt}`)
+      .then(response => response.json())
+      .then(data => {
+        const tableBody = document.getElementById('summed-table-body');
+        tableBody.innerHTML = ''; // Clear previous data
+
+        data.forEach(row => {
+          const tr = document.createElement('tr');
+          tr.innerHTML = `<td>${row.party_abbreviation}</td><td>${row.total_score}</td>`;
+          tableBody.appendChild(tr);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+        // Handle error if any
+      });
+  }
+</script>
+</body>
+</html>

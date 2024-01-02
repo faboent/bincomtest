@@ -1,0 +1,93 @@
+<!-- views/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Data Table</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* styles.css */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 30px;
+  color: #333;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #555;
+}
+
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="/">Home</a>
+    <a href="/summed">Summed Results</a>
+    <a href="/results">Store Results</a>
+  </div>
+
+  
+<h1>Store Polling Unit Results</h1>
+<form action="/store-results" method="POST">
+    <label for="pollingUnitUniqueId">Polling unit id:</label>
+  <input type="text" id="pollingUnitUniqueId" name="pollingUnitUniqueId"><br><br>
+
+  <label for="partyAbbreviation">Party Abbreviation:</label>
+  <input type="text" id="partyAbbreviation" name="partyAbbreviation"><br><br>
+
+  <label for="partyScore">Party Score:</label>
+  <input type="number" id="partyScore" name="partyScore"><br><br>
+
+  <label for="enteredByUser">Entered By User:</label>
+  <input type="text" id="enteredByUser" name="enteredByUser"><br><br>
+
+  <label for="dateEntered">Date Entered:</label>
+  <input type="date" id="dateEntered" name="dateEntered"><br><br>
+
+  <input type="submit" value="Submit">
+</form>
+</body>
+</html>
